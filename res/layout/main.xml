@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fadeScrollbars="true" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/compose_background"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/composeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:paddingRight="5dp"
+                android:text="@string/compose"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0.5dp"
+                android:layout_height="fill_parent"
+                android:background="#dd666666" />
+
+            <TextView
+                android:id="@+id/setSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/bgselector"
+                android:text="@string/setSchedule"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:drawableRight="@drawable/schedule"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0.5dp"
+                android:layout_height="fill_parent"
+                android:background="#dd666666" />
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/sendButtonId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:drawableRight="@android:drawable/ic_menu_send"
+                android:hint="@string/send" />
+        </LinearLayout>
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/whenLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:gravity="center_vertical"
+                android:text="@string/when" />
+
+            <TextView
+                android:id="@+id/when"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/whenLabel"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:padding="15dp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/fromLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/whenLabel"
+                android:padding="15dp"
+                android:gravity="center_vertical"
+                android:text="@string/from" />
+
+            <TextView
+                android:id="@+id/from"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/when"
+                android:layout_toRightOf="@id/fromLabel"
+                android:maxLines="1"
+                android:padding="10dp" >
+            </TextView>
+
+            <Spinner
+                android:id="@+id/fromSpinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/from"
+                android:layout_alignParentRight="true"
+                android:layout_alignBaseline="@id/fromLabel"
+                />
+        </RelativeLayout>
+
+        <AutoCompleteTextView
+            android:id="@+id/to"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/to"
+            android:inputType="textEmailAddress"
+            android:singleLine="true" >
+
+            
+        </AutoCompleteTextView>
+
+        <EditText
+            android:id="@+id/subject"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailSubject"
+            android:hint="@string/subject"
+            android:singleLine="true" >
+        </EditText>
+
+        <EditText
+            android:id="@+id/mailText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:hint="@string/composeMail"
+            android:minLines="5" />
+    </LinearLayout>
+
+</ScrollView>

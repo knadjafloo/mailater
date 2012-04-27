@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 	
+ 	<string name="app_name">Mailater</string>
+    <string name="compose">新增邮件</string> <!-- Compose -->
+    <string name="from">寄件人:</string> <!-- From -->
+    <string name="to">收件人:</string> <!-- To -->
+    <string name="cc">副本:</string> <!-- CC -->
+    <string name="subject">主旨:</string> <!-- Subject -->
+    <string name="composeMail">撰写:</string> <!-- Compose Mail -->
+    <string name="setSchedule">时间表</string> <!-- Schedule -->
+    <string name="send">传送</string> <!-- Send -->
+    <string name="when">时间表</string> <!-- When -->
+    <string name="noEmails">无寄出信件</string> <!-- No Emails Sent -->
+    <string name="iconDescription">图示</string> <!-- Icon -->
+    <string name="chooseAccount">选择帐户:</string> <!-- Please choose an account: -->
+    <string name="providerPassword">输入密码</string> <!-- Please provide the password to -->
+    <string name="submit">确认</string> <!-- Submit -->
+    <string name="password">密码</string> <!-- Password -->
+    <string name="cancel">取消</string> <!-- Cancel -->
+    <string name="setTimeDate">设定时间日期</string> <!-- Set Time and Date -->
+   
+    <string name="am">上午</string>
+    <string name="pm">下午</string>
+   
+       <string name="January">一月</string>
+       <string name="February">二月</string>
+       <string name="March">三月</string>
+       <string name="April">四月</string>
+       <string name="May">五月</string>
+       <string name="June">六月</string>
+       <string name="July">7月</string>
+       <string name="August">八月</string>
+       <string name="September">九月</string>
+       <string name="October">十月</string>
+       <string name="November">十一月</string>
+       <string name="December">十二月</string>
+      
+       <string name="enterSubject">请输入主旨</string> <!-- Please enter a subject. -->
+       <string name="enterTimeFuture">请输入未来时间。 </string> <!-- Please enter the time in the future. -->
+       <string name="needReceipient">请输入收件人地址。 </string> <!-- Please enter the recipient\'s email address(es). -->
+       <string name="enterValidEmail">请输入有效地址</string> <!-- Please enter a valid email address -->
+      
+        <string name="Main">新增</string>
+        <string name="Pending">未发送邮件</string>
+        <string name="Outbox">寄件备份</string>
+        
+        <string name="Delete">删除</string>
+        <string name="SendNow">立即传送</string>
+        
+        <string name="selectAction">动作选项</string> <!-- Select an action -->
+      
+    <string name="validationFailedMessage">请填入所有相关栏位资料及预设时间</string> <!-- Please enter all required fields and set the time to future -->
+    <string name="dateFormat">MMM dd, yyyy h:mmaa</string>
+</resources>

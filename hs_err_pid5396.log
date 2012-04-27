@@ -1,0 +1,111 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (classFileParser.cpp:3161), pid=5396, tid=6088
+#  Error: ShouldNotReachHere()
+#
+# JRE version: 6.0_22-b04
+# Java VM: Java HotSpot(TM) Client VM (17.1-b03 mixed mode windows-x86 )
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x01eb9000):  JavaThread "Unknown thread" [_thread_in_vm, id=6088, stack(0x00470000,0x004c0000)]
+
+Stack: [0x00470000,0x004c0000],  sp=0x004bf880,  free space=13e004bf890k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x1fd0f0]
+V  [jvm.dll+0xa4679]
+V  [jvm.dll+0x75ec1]
+V  [jvm.dll+0x77564]
+V  [jvm.dll+0x1cbc85]
+V  [jvm.dll+0x1cc3bd]
+V  [jvm.dll+0x1cc775]
+V  [jvm.dll+0x1cc7bb]
+V  [jvm.dll+0x1cc8e2]
+V  [jvm.dll+0x1cc95a]
+V  [jvm.dll+0x1cce0d]
+V  [jvm.dll+0x1cd222]
+V  [jvm.dll+0x1ecf03]
+V  [jvm.dll+0x1ed2dc]
+V  [jvm.dll+0xdb681]
+V  [jvm.dll+0x1e6668]
+V  [jvm.dll+0x1065b0]
+C  [javaw.exe+0x1657]
+C  [javaw.exe+0x1e2c]
+C  [javaw.exe+0x8614]
+C  [kernel32.dll+0x1339a]
+C  [ntdll.dll+0x39ed2]
+C  [ntdll.dll+0x39ea5]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x01eb9000 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=6088, stack(0x00470000,0x004c0000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Dynamic libraries:
+0x00400000 - 0x00424000 	C:\Program Files (x86)\Java\jre6\bin\javaw.exe
+0x77130000 - 0x772b0000 	C:\Windows\SysWOW64\ntdll.dll
+0x75570000 - 0x75680000 	C:\Windows\syswow64\kernel32.dll
+0x74b50000 - 0x74b96000 	C:\Windows\syswow64\KERNELBASE.dll
+0x746c0000 - 0x746f4000 	C:\Program Files\Alwil Software\Avast5\snxhk.dll
+0x74da0000 - 0x74e40000 	C:\Windows\syswow64\ADVAPI32.dll
+0x748f0000 - 0x7499c000 	C:\Windows\syswow64\msvcrt.dll
+0x748d0000 - 0x748e9000 	C:\Windows\SysWOW64\sechost.dll
+0x76410000 - 0x76500000 	C:\Windows\syswow64\RPCRT4.dll
+0x74810000 - 0x74870000 	C:\Windows\syswow64\SspiCli.dll
+0x74800000 - 0x7480c000 	C:\Windows\syswow64\CRYPTBASE.dll
+0x74c70000 - 0x74d70000 	C:\Windows\syswow64\USER32.dll
+0x766b0000 - 0x76740000 	C:\Windows\syswow64\GDI32.dll
+0x749a0000 - 0x749aa000 	C:\Windows\syswow64\LPK.dll
+0x74ab0000 - 0x74b4d000 	C:\Windows\syswow64\USP10.dll
+0x75280000 - 0x752e0000 	C:\Windows\system32\IMM32.DLL
+0x749e0000 - 0x74aac000 	C:\Windows\syswow64\MSCTF.dll
+0x7c340000 - 0x7c396000 	C:\Program Files (x86)\Java\jre6\bin\msvcr71.dll
+0x6d7f0000 - 0x6da97000 	C:\Program Files (x86)\Java\jre6\bin\client\jvm.dll
+0x71db0000 - 0x71de2000 	C:\Windows\system32\WINMM.dll
+0x70f60000 - 0x70fac000 	C:\Windows\system32\apphelp.dll
+0x6d7a0000 - 0x6d7ac000 	C:\Program Files (x86)\Java\jre6\bin\verify.dll
+0x6d320000 - 0x6d33f000 	C:\Program Files (x86)\Java\jre6\bin\java.dll
+0x6d280000 - 0x6d288000 	C:\Program Files (x86)\Java\jre6\bin\hpi.dll
+0x766a0000 - 0x766a5000 	C:\Windows\syswow64\PSAPI.DLL
+0x6d7e0000 - 0x6d7ef000 	C:\Program Files (x86)\Java\jre6\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=Cp1252 -Xbootclasspath:F:\android-sdk-windows\platforms\android-7\android.jar 
+java_command: com.threebars.mailater.Test
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=F:\Program Files\Java\jdk1.6.0_07
+CLASSPATH=.;C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip
+PATH=C:/Program Files (x86)/Java/jre6/bin/client;C:/Program Files (x86)/Java/jre6/bin;C:/Program Files (x86)/Java/jre6/lib/i386;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;c:\Program Files (x86)\Common Files\Roxio Shared\DLLShared\;F:\android-sdk-windows\tools;F:\android-sdk-windows\platform-tools;C:\Program Files (x86)\QuickTime\QTSystem\;F:\Program Files\Java\jdk1.6.0_07\bin;C:\Program Files (x86)\IDM Computer Solutions\UltraEdit\;F:\eclipse;
+USERNAME=Kamyar
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 23 Stepping 10, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 Build 7601 Service Pack 1
+
+CPU:total 2 (2 cores per cpu, 1 threads per core) family 6 model 23 stepping 10, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3
+
+Memory: 4k page, physical 4193264k(1512532k free), swap 8384680k(5391464k free)
+
+vm_info: Java HotSpot(TM) Client VM (17.1-b03) for windows-x86 JRE (1.6.0_22-b04), built on Sep 15 2010 00:56:36 by "java_re" with MS VC++ 7.1 (VS2003)
+
+time: Mon Feb 27 23:28:37 2012
+elapsed time: 0 seconds
+

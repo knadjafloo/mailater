@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mailater</string>
+
+    <string name="compose">Compose</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="cc">CC:</string>
+    <string name="subject">Subject:</string>
+    <string name="composeMail">Compose Mail:</string>
+    <string name="setSchedule">Schedule</string>
+    <string name="send">Send</string>
+    <string name="when">When</string>
+    <string name="noEmails">No Emails Sent</string>
+    <string name="iconDescription">Icon</string>
+    <string name="chooseAccount">Please choose an account:</string>
+    <string name="providerPassword">Please provide the password to </string>
+    <string name="submit">Submit</string>
+    <string name="password">Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="setTimeDate">Set Time and Date</string>
+    
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+    
+  	<string name="January">January</string>  
+  	<string name="February">February</string>
+  	<string name="March">March</string>
+  	<string name="April">April</string>
+  	<string name="May">May</string>
+  	<string name="June">June</string>
+  	<string name="July">July</string>
+  	<string name="August">August</string>
+  	<string name="September">September</string>
+  	<string name="October">October</string>
+  	<string name="November">November</string>
+  	<string name="December">December</string>
+  	
+  	<string name="enterSubject">Please enter a subject.</string>
+  	<string name="enterTimeFuture">Please enter the time in the future.</string>
+  	<string name="needReceipient">Please enter the recipient\'s email address(es).</string>
+  	<string name="enterValidEmail">Please enter a valid email address</string>
+  	
+  	 <string name="Main">Compose</string>
+  	 <string name="Pending">Pending</string>
+  	 <string name="Outbox">Sent Mail</string>
+  	 
+  	 <string name="Delete">Delete</string>
+  	 <string name="SendNow">Send Now</string>
+  	 
+  	 <string name="selectAction">Select an action</string>
+  	
+    <string name="validationFailedMessage">Please enter all required fields and set the time to future</string>
+    <string name="dateFormat">MMM dd, yyyy h:mmaa</string>
+</resources>
+
+
+
+

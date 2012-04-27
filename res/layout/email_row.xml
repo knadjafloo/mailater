@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:id="@+id/emailSubject"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:text="subject"/>
+    
+    <TextView android:layout_width="wrap_content"
+        android:id="@+id/divider"
+        android:layout_height="wrap_content"
+        android:text=" - "
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@id/emailSubject"
+        android:layout_alignBaseline="@id/emailSubject"
+        />
+    
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="26dp"
+        android:id="@+id/emailText"
+        android:maxLines="1"
+        android:textSize="16dp"
+        android:gravity="center_vertical"
+        android:ellipsize="end"
+        android:layout_toRightOf="@id/divider"
+        android:layout_alignBaseline="@id/emailSubject"
+        />
+    
+    <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_below="@id/emailSubject">
+    <TextView
+        android:id="@+id/emailAddress"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_gravity="left"
+        android:singleLine="true"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:layout_weight=".60"
+         />
+
+    <TextView
+        android:id="@+id/emailDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".40"
+        android:gravity="right"
+        android:lines="1"
+        android:padding="3dp"
+        android:textColor="@color/orange"
+         />
+
+    </LinearLayout>	
+</RelativeLayout>
