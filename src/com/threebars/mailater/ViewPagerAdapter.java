@@ -612,7 +612,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	private void showPasswordDialog(final TextListener listener, String account) {
 		final EditText input = new EditText(context);
 		input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-		new AlertDialog.Builder(context).setTitle(context.getString(R.string.password)).setMessage(context.getString(R.string.providerPassword) + account).setView(input).setPositiveButton(context.getString(R.string.submit), new DialogInterface.OnClickListener() {
+		new AlertDialog.Builder(context).setTitle(context.getString(R.string.password)).setMessage(context.getString(R.string.providerPassword) + " " + account).setView(input).setPositiveButton(context.getString(R.string.submit), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				try {
 					String password = input.getText().toString();
