@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 
+     <string name="app_name">Mailater</string>
+    <string name="compose">Composição</string> <!-- Compose -->
+    <string name="from">De:</string> <!-- From -->
+    <string name="to">Para:</string> <!-- To -->
+    <string name="cc">CC:</string> <!-- CC -->
+    <string name="subject">Assunto:</string> <!-- Subject -->
+    <string name="composeMail">Escrever e-mail:</string> <!-- Compose Mail -->
+    <string name="setSchedule">Programar</string> <!-- Schedule -->
+    <string name="send">Enviar</string> <!-- Send -->
+    <string name="when">Data/Hora</string> <!-- When -->
+    <string name="noEmails">Sem E-mails Enviados</string> <!-- No Emails Sent -->
+    <string name="iconDescription">Icon</string> <!-- Icon -->
+    <string name="chooseAccount">Por favor, escolha uma conta:</string> <!-- Please choose an account: -->
+    <string name="providerPassword">Por favor, forneça a senha para</string> <!-- Please provide the password to -->
+    <string name="submit">Enviar</string> <!-- Submit -->
+    <string name="password">Senha </string> <!-- Password -->
+    <string name="cancel">Cancelar</string> <!-- Cancel --> 
+    <string name="setTimeDate"> Definir hora e data</string> <!-- Set Time and Date -->
+   
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+   
+       <string name="January">Janeiro</string> 
+       <string name="February">Fevereiro</string>
+       <string name="March">Março</string>
+       <string name="April">Abril</string>
+       <string name="May">Maio</string>
+       <string name="June">Junho</string>
+       <string name="July">Julho</string>
+       <string name="August">Agosto</string> 
+       <string name="September">Setembro</string>
+       <string name="October">Outubro</string>
+       <string name="November">Novembro</string>
+       <string name="December">Dezembro</string>
+      
+       <string name="enterSubject">Por favor insira um assunto</string> <!-- Please enter a subject. -->
+       <string name="enterTimeFuture">Por favor, indique o tempo no future.</string> <!-- Please enter the time in the future. -->
+       <string name="needReceipient">Por favor, indique o destinatário\'s endereço de email (s).</string> <!-- Please enter the recipient\'s email address(es). -->
+       <string name="enterValidEmail">Por favor insira um email válido</string> <!-- Please enter a valid email address -->
+      
+        <string name="Main">Composição</string>
+        <string name="Pending">Pendente</string>
+        <string name="Outbox">Caixa de saída</string>
+        
+        <string name="Delete">Excluir</string>
+        <string name="SendNow">Enviar agora</string>
+        
+        <string name="selectAction">Selecione uma ação</string> <!-- Select an action -->
+      
+    <string name="validationFailedMessage"> Por favor, indique todos os campos necessários e definir o tempo para o futuro </string> <!-- Please enter all required fields and set the time to future -->
+    <string name="dateFormat">dd MMM, yyyy h:mmaa</string>
+    <string name="dateFormat">dd MMM, yyyy h:mmaa</string>
+</resources>
