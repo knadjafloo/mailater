@@ -20,6 +20,9 @@
     <string name="cancel">取消</string> <!-- Cancel -->
     <string name="setTimeDate">設定時間日期</string> <!-- Set Time and Date -->
    
+    <string name="Date">日期:</string>
+    <string name="Time">時間:</string>
+   
     <string name="am">上午</string>
     <string name="pm">下午</string>
    
@@ -51,5 +54,6 @@
       <string name="selectAction">動作選項</string> <!-- Select an action -->
       
     <string name="validationFailedMessage">請填入所有相關欄位資料及預設時間</string> <!-- Please enter all required fields and set the time to future -->
-    <string name="dateFormat">MMM dd, yyyy h:mmaa</string>
+    <string name="dateFormat">MMM dd, yyyy</string>
+    <string name="timeFormat">h:mmaa</string>
 </resources>

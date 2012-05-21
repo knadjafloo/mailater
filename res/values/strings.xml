@@ -21,6 +21,9 @@
     <string name="cancel">Cancel</string>
     <string name="setTimeDate">Set Time and Date</string>
     
+    <string name="Date">Date:</string>
+    <string name="Time">Time:</string>
+    
     <string name="am">AM</string>
     <string name="pm">PM</string>
     
@@ -52,7 +55,8 @@
   	 <string name="selectAction">Select an action</string>
   	
     <string name="validationFailedMessage">Please enter all required fields and set the time to future</string>
-    <string name="dateFormat">MMM dd, yyyy h:mmaa</string>
+    <string name="dateFormat">MMM dd, yyyy</string>
+    <string name="timeFormat">h:mmaa</string>
 </resources>
 
 

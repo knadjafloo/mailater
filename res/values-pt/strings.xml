@@ -20,6 +20,9 @@
     <string name="cancel">Cancelar</string> <!-- Cancel --> 
     <string name="setTimeDate"> Definir hora e data</string> <!-- Set Time and Date -->
    
+    <string name="Date">Data:</string>
+    <string name="Time">Hora:</string>
+   
     <string name="am">AM</string>
     <string name="pm">PM</string>
    
@@ -52,5 +55,5 @@
       
     <string name="validationFailedMessage"> Por favor, indique todos os campos necessários e definir o tempo para o futuro </string> <!-- Please enter all required fields and set the time to future -->
     <string name="dateFormat">dd MMM, yyyy h:mmaa</string>
-    <string name="dateFormat">dd MMM, yyyy h:mmaa</string>
+    <string name="timeFormat">h:mmaa</string>
 </resources>

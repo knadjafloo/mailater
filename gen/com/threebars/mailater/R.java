@@ -456,57 +456,62 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hotmail=0x7f020005;
         public static final int ic_launcher=0x7f020006;
         public static final int layout_bg=0x7f020007;
-        public static final int schedule=0x7f020008;
-        public static final int vpi__tab_indicator=0x7f020009;
-        public static final int vpi__tab_selected_focused_holo=0x7f02000a;
-        public static final int vpi__tab_selected_holo=0x7f02000b;
-        public static final int vpi__tab_selected_pressed_holo=0x7f02000c;
-        public static final int vpi__tab_unselected_focused_holo=0x7f02000d;
-        public static final int vpi__tab_unselected_holo=0x7f02000e;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f02000f;
-        public static final int wheel_bg=0x7f020010;
-        public static final int wheel_val=0x7f020011;
-        public static final int yahoo=0x7f020012;
+        public static final int next=0x7f020008;
+        public static final int schedule=0x7f020009;
+        public static final int vpi__tab_indicator=0x7f02000a;
+        public static final int vpi__tab_selected_focused_holo=0x7f02000b;
+        public static final int vpi__tab_selected_holo=0x7f02000c;
+        public static final int vpi__tab_selected_pressed_holo=0x7f02000d;
+        public static final int vpi__tab_unselected_focused_holo=0x7f02000e;
+        public static final int vpi__tab_unselected_holo=0x7f02000f;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f020010;
+        public static final int yahoo=0x7f020011;
     }
     public static final class id {
         public static final int LinearLayout01=0x7f040006;
-        public static final int accountName=0x7f040015;
+        public static final int accountName=0x7f040017;
         public static final int accountsExpandableListView=0x7f040005;
-        public static final int ampm=0x7f040023;
-        public static final int composeLabel=0x7f040016;
-        public static final int day=0x7f04001e;
-        public static final int divider=0x7f040010;
-        public static final int emailAddress=0x7f040012;
-        public static final int emailDate=0x7f040013;
-        public static final int emailList=0x7f04001a;
-        public static final int emailSubject=0x7f04000f;
-        public static final int emailText=0x7f040011;
-        public static final int from=0x7f04000b;
-        public static final int fromLabel=0x7f04000a;
-        public static final int fromSpinner=0x7f040019;
+        public static final int ampm=0x7f040029;
+        public static final int clearable_button_clear=0x7f040009;
+        public static final int clearable_edit=0x7f040008;
+        public static final int composeLabel=0x7f040019;
+        public static final int date=0x7f04001c;
+        public static final int dateLabel=0x7f04001b;
+        public static final int day=0x7f040024;
+        public static final int divider=0x7f040012;
+        public static final int emailAddress=0x7f040014;
+        public static final int emailDate=0x7f040015;
+        public static final int emailList=0x7f040020;
+        public static final int emailSubject=0x7f040011;
+        public static final int emailText=0x7f040013;
+        public static final int from=0x7f04000d;
+        public static final int fromLabel=0x7f04000c;
+        public static final int fromSpinner=0x7f04001f;
         public static final int horizontal=0x7f040000;
-        public static final int hour=0x7f040021;
-        public static final int icon1=0x7f04001d;
-        public static final int indicator=0x7f04001b;
-        public static final int logo=0x7f040014;
-        public static final int mailText=0x7f04000e;
-        public static final int mins=0x7f040022;
-        public static final int month=0x7f04001f;
+        public static final int hour=0x7f040027;
+        public static final int icon1=0x7f040023;
+        public static final int indicator=0x7f040021;
+        public static final int listItem=0x7f040018;
+        public static final int logo=0x7f040016;
+        public static final int mailText=0x7f040010;
+        public static final int mins=0x7f040028;
+        public static final int month=0x7f040025;
         public static final int none=0x7f040002;
-        public static final int sendButtonId=0x7f040018;
-        public static final int setSchedule=0x7f040017;
-        public static final int setScheduleButton=0x7f040024;
-        public static final int subject=0x7f04000d;
-        public static final int text=0x7f040025;
-        public static final int to=0x7f04000c;
+        public static final int sendButtonId=0x7f04001a;
+        public static final int setScheduleButton=0x7f04002a;
+        public static final int subject=0x7f04000f;
+        public static final int text=0x7f04002b;
+        public static final int time=0x7f04001e;
+        public static final int timeLabel=0x7f04001d;
+        public static final int to=0x7f04000e;
         public static final int triangle=0x7f040003;
         public static final int tvChild=0x7f040007;
         public static final int underline=0x7f040004;
         public static final int vertical=0x7f040001;
-        public static final int viewpager=0x7f04001c;
-        public static final int when=0x7f040009;
-        public static final int whenLabel=0x7f040008;
-        public static final int year=0x7f040020;
+        public static final int viewpager=0x7f040022;
+        public static final int when=0x7f04000b;
+        public static final int whenLabel=0x7f04000a;
+        public static final int year=0x7f040026;
     }
     public static final class integer {
         public static final int default_circle_indicator_orientation=0x7f070000;
@@ -515,48 +520,54 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class layout {
         public static final int accounts=0x7f030000;
         public static final int child_layout=0x7f030001;
-        public static final int email_detail=0x7f030002;
-        public static final int email_row=0x7f030003;
-        public static final int group_layout=0x7f030004;
-        public static final int list_item=0x7f030005;
-        public static final int main=0x7f030006;
-        public static final int outbox=0x7f030007;
-        public static final int pending_emails=0x7f030008;
-        public static final int scroll_main=0x7f030009;
-        public static final int spinner_item=0x7f03000a;
-        public static final int time2_layout=0x7f03000b;
-        public static final int vpi__tab=0x7f03000c;
-        public static final int wheel_text_item=0x7f03000d;
+        public static final int edit_text_with_button=0x7f030002;
+        public static final int email_detail=0x7f030003;
+        public static final int email_row=0x7f030004;
+        public static final int group_layout=0x7f030005;
+        public static final int list_item=0x7f030006;
+        public static final int main=0x7f030007;
+        public static final int outbox=0x7f030008;
+        public static final int pending_emails=0x7f030009;
+        public static final int scroll_main=0x7f03000a;
+        public static final int spinner_item=0x7f03000b;
+        public static final int time2_layout=0x7f03000c;
+        public static final int vpi__tab=0x7f03000d;
+        public static final int wheel_text_item=0x7f03000e;
     }
     public static final class string {
-        public static final int April=0x7f0a0017;
-        public static final int August=0x7f0a001b;
-        public static final int December=0x7f0a001f;
-        public static final int Delete=0x7f0a0027;
-        public static final int February=0x7f0a0015;
-        public static final int January=0x7f0a0014;
-        public static final int July=0x7f0a001a;
-        public static final int June=0x7f0a0019;
-        /**  Please enter a valid email address 
- Please enter a valid email address 
- Please enter a valid email address 
-         */
-        public static final int Main=0x7f0a0024;
-        public static final int March=0x7f0a0016;
-        public static final int May=0x7f0a0018;
-        public static final int November=0x7f0a001e;
-        public static final int October=0x7f0a001d;
-        public static final int Outbox=0x7f0a0026;
-        public static final int Pending=0x7f0a0025;
-        public static final int SendNow=0x7f0a0028;
-        public static final int September=0x7f0a001c;
+        public static final int April=0x7f0a0019;
+        public static final int August=0x7f0a001d;
         /**  Set Time and Date 
  Set Time and Date 
  Set Time and Date 
+ Set Time and Date 
          */
-        public static final int am=0x7f0a0012;
+        public static final int Date=0x7f0a0012;
+        public static final int December=0x7f0a0021;
+        public static final int Delete=0x7f0a0029;
+        public static final int February=0x7f0a0017;
+        public static final int January=0x7f0a0016;
+        public static final int July=0x7f0a001c;
+        public static final int June=0x7f0a001b;
+        /**  Please enter a valid email address 
+ Please enter a valid email address 
+ Please enter a valid email address 
+ Please enter a valid email address 
+         */
+        public static final int Main=0x7f0a0026;
+        public static final int March=0x7f0a0018;
+        public static final int May=0x7f0a001a;
+        public static final int November=0x7f0a0020;
+        public static final int October=0x7f0a001f;
+        public static final int Outbox=0x7f0a0028;
+        public static final int Pending=0x7f0a0027;
+        public static final int SendNow=0x7f0a002a;
+        public static final int September=0x7f0a001e;
+        public static final int Time=0x7f0a0013;
+        public static final int am=0x7f0a0014;
         public static final int app_name=0x7f0a0000;
         /**  Password 
+ Password 
  Password 
  Password 
          */
@@ -564,9 +575,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  To 
  To 
  To 
+ To 
          */
         public static final int cc=0x7f0a0004;
         /**  Icon 
+ Icon 
  Icon 
  Icon 
          */
@@ -575,25 +588,30 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Subject 
  Subject 
  Subject 
+ Subject 
          */
         public static final int composeMail=0x7f0a0006;
         /**  Please enter all required fields and set the time to future 
  Please enter all required fields and set the time to future 
  Please enter all required fields and set the time to future 
+ Please enter all required fields and set the time to future 
          */
-        public static final int dateFormat=0x7f0a002b;
-        public static final int enterSubject=0x7f0a0020;
+        public static final int dateFormat=0x7f0a002d;
+        public static final int enterSubject=0x7f0a0022;
         /**  Please enter a subject. 
  Please enter a subject. 
  Please enter a subject. 
+ Please enter a subject. 
          */
-        public static final int enterTimeFuture=0x7f0a0021;
+        public static final int enterTimeFuture=0x7f0a0023;
         /**  Please enter the recipient\'s email address(es). 
  Please enter the recipient\'s email address(es). 
  Please enter the recipient\'s email address(es). 
+ Please enter the recipient\'s email address(es). 
          */
-        public static final int enterValidEmail=0x7f0a0023;
+        public static final int enterValidEmail=0x7f0a0025;
         /**  Compose 
+ Compose 
  Compose 
  Compose 
          */
@@ -601,14 +619,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  No Emails Sent 
  No Emails Sent 
  No Emails Sent 
+ No Emails Sent 
          */
         public static final int iconDescription=0x7f0a000b;
         /**  Please enter the time in the future. 
  Please enter the time in the future. 
  Please enter the time in the future. 
+ Please enter the time in the future. 
          */
-        public static final int needReceipient=0x7f0a0022;
+        public static final int needReceipient=0x7f0a0024;
         /**  When 
+ When 
  When 
  When 
          */
@@ -616,16 +637,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Submit 
  Submit 
  Submit 
+ Submit 
          */
         public static final int password=0x7f0a000f;
-        public static final int pm=0x7f0a0013;
+        public static final int pm=0x7f0a0015;
         /**  Please choose an account: 
+ Please choose an account: 
  Please choose an account: 
  Please choose an account: 
          */
         public static final int providerPassword=0x7f0a000d;
-        public static final int selectAction=0x7f0a0029;
+        public static final int selectAction=0x7f0a002b;
         /**  Schedule 
+ Schedule 
  Schedule 
  Schedule 
          */
@@ -633,9 +657,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Compose Mail 
  Compose Mail 
  Compose Mail 
+ Compose Mail 
          */
         public static final int setSchedule=0x7f0a0007;
         /**  Cancel 
+ Cancel 
  Cancel 
  Cancel 
          */
@@ -643,14 +669,18 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  CC 
  CC 
  CC 
+ CC 
          */
         public static final int subject=0x7f0a0005;
         /**  Please provide the password to 
  Please provide the password to 
  Please provide the password to 
+ Please provide the password to 
          */
         public static final int submit=0x7f0a000e;
+        public static final int timeFormat=0x7f0a002e;
         /**  From 
+ From 
  From 
  From 
          */
@@ -658,9 +688,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  Select an action 
  Select an action 
  Select an action 
+ Select an action 
          */
-        public static final int validationFailedMessage=0x7f0a002a;
+        public static final int validationFailedMessage=0x7f0a002c;
         /**  Send 
+ Send 
  Send 
  Send 
          */

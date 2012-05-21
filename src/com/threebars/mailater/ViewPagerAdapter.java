@@ -7,38 +7,23 @@ import static com.threebars.mailater.Mail.MAIL_CONFIG.YAHOO;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import kankan.wheel.widget.OnWheelChangedListener;
-import kankan.wheel.widget.WheelView;
-import kankan.wheel.widget.adapters.ArrayWheelAdapter;
-import kankan.wheel.widget.adapters.NumericWheelAdapter;
-
-import com.threebars.mailater.database.EmailsDAO;
-import com.threebars.mailater.database.MySQLiteHelper.COLUMN_NAMES;
-import com.threebars.mailater.model.DelayedEmail;
-import com.threebars.mailater.services.SendMailService;
-import com.threebars.mailater.util.MailaterUtil;
-import com.viewpagerindicator.TitleProvider;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.PendingIntent;
 import android.app.AlertDialog.Builder;
+import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
@@ -50,7 +35,6 @@ import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -59,11 +43,20 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.threebars.mailater.database.EmailsDAO;
+import com.threebars.mailater.database.MySQLiteHelper.COLUMN_NAMES;
+import com.threebars.mailater.model.DelayedEmail;
+import com.threebars.mailater.services.SendMailService;
+import com.threebars.mailater.util.MailaterUtil;
+import com.viewpagerindicator.TitleProvider;
 
 public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	private static String[] titles ;//= new String[] { "Main", "Pending", "Outbox" };
@@ -79,6 +72,15 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	private final static int PENDING_PAGE = 1;
 	private final static int OUTBOX_PAGE = 2;
 	
+	private static final int DATE_DIALOG_ID = 10;
+	private static final int TIME_DIALOG_ID = 11;
+	
+	private int mYear;
+    private int mMonth;
+    private int mDay;
+	
+    private int mHour;
+    private int mMinute;
 	
 	private Cursor pendingCursor;
 	private Cursor outboxCursor;
@@ -101,7 +103,12 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	
 	private Time time;
 	private AutoCompleteTextView recipientFieldTextView ;
-	private TextView whenView;
+	private TextView dateView;
+	private TextView timeView;
+	
+	private SimpleDateFormat dateFormatter;
+	private SimpleDateFormat timeFormatter;
+	
 	
 	public ViewPagerAdapter(Context context, ViewPager viewPager) {
 		this.context = context;
@@ -114,6 +121,10 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		
 		editActions = new String[] {DELETE_ACTION};
 		sendAndDeleteActions = new String[] {RESEND_ACTION, DELETE_ACTION};
+		
+		dateFormatter = new SimpleDateFormat(context.getString(R.string.dateFormat));
+		timeFormatter = new SimpleDateFormat(context.getString(R.string.timeFormat));
+		
 		
 	}
 
@@ -198,6 +209,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	public Cursor getOutboxCursor() {
 		return this.outboxCursor;
 	}
+	
 	//------------------------------------------------------ private methods
 	private void goToViewPage(int index) {
 		this.viewPager.setCurrentItem(index);
@@ -387,6 +399,64 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		return false;
 	}
 	
+	private DatePickerDialog datePickerDialog;
+	private TimePickerDialog timePickerDialog;
+
+	private void showDialog(int id) {
+		switch (id) {
+		case DATE_DIALOG_ID:
+			if(datePickerDialog == null) {
+				datePickerDialog = new DatePickerDialog(context, mDateSetListener, mYear, mMonth, mDay);
+			}
+			else {
+				datePickerDialog.updateDate(mYear, mMonth, mDay);
+			}
+			datePickerDialog.show();
+			return;
+		case TIME_DIALOG_ID:
+			if(timePickerDialog == null) {
+				timePickerDialog = new TimePickerDialog(context, mTimeSetListener, mHour, mMinute, false);
+			}
+			else {
+				timePickerDialog.updateTime(mHour, mMinute);
+			}
+			timePickerDialog.show();
+			return;
+		}
+	}
+
+	// the callback received when the user "sets" the date in the dialog
+	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+			mYear = year;
+			mMonth = monthOfYear;
+			mDay = dayOfMonth;
+			updateDisplay();
+		}
+	};
+
+	// the callback received when the user "sets" the time in the dialog
+	private TimePickerDialog.OnTimeSetListener mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			mHour = hourOfDay;
+			mMinute = minute;
+			updateDisplay();
+		}
+	};
+	
+    // updates the date in the TextView
+    private void updateDisplay() {
+    	Calendar cal = Calendar.getInstance();
+    	cal.set(Calendar.YEAR, mYear);
+    	cal.set(Calendar.MONTH, mMonth);
+    	cal.set(Calendar.DAY_OF_MONTH, mDay);
+    	cal.set(Calendar.HOUR_OF_DAY, mHour);
+    	cal.set(Calendar.MINUTE, mMinute);
+    	
+        dateView.setText(dateFormatter.format(cal.getTime()));
+        timeView.setText(timeFormatter.format(cal.getTime()));
+    }
 
 	private void initiateMainAcitivity(final View layout) {
 		cleanUp();
@@ -397,12 +467,37 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		}
 		else {
 			// add the contacts to the 'To' field of email
+//			TextView listItem = (TextView)layout.findViewById(R.id.listItem);
+			
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.list_item, emailContacts);
 			recipientFieldTextView.setAdapter(adapter);
 		}
-		whenView = (TextView) layout.findViewById(R.id.when);
-		whenView.setText("");
+		Calendar now = Calendar.getInstance();
+		dateView = (TextView) layout.findViewById(R.id.date);
+		dateView.setText(dateFormatter.format(now.getTime()));
 		
+		timeView = (TextView) layout.findViewById(R.id.time);
+		timeView.setText(timeFormatter.format(now.getTime()));
+		
+		  // get the current date
+        mYear = now.get(Calendar.YEAR);
+        mMonth = now.get(Calendar.MONTH);
+        mDay = now.get(Calendar.DAY_OF_MONTH);
+        
+        mHour = now.get(Calendar.HOUR_OF_DAY);
+        mMinute = now.get(Calendar.MINUTE);
+		
+		dateView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showDialog(DATE_DIALOG_ID);
+            }
+        });
+		
+		timeView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showDialog(TIME_DIALOG_ID);
+            }
+        });
 		
 		// TODO - do in separate thread
 		AccountManager accountManager = AccountManager.get(context);
@@ -459,16 +554,6 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		}
 */		
 
-		TextView scheduleButton = (TextView) layout.findViewById(R.id.setSchedule);
-		scheduleButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-//				Intent getSchedule = new Intent(MailaterActivity.this, ScheduleActivity.class);
-//				startActivityForResult(getSchedule, GET_SCHEDULE);
-				showDateTimeDialog(layout);
-			}
-		});
 
 		Button sendButton = (Button) layout.findViewById(R.id.sendButtonId);
 		sendButton.setOnClickListener(new OnClickListener() {
@@ -510,8 +595,10 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 								Log.d(TAG, recepientList.toString());
 								Calendar cal = Calendar.getInstance();
 								cal.setTimeInMillis(time.toMillis(false));
-								SimpleDateFormat df = new SimpleDateFormat(context.getString(R.string.dateFormat));
-								DelayedEmail delayedEmail = emailsDao.createEmail(from, recepientList.toString(), MailaterUtil.getStringIfNotNull(subject), MailaterUtil.getStringIfNotNull(body),df.format(cal.getTime()));
+								
+								String dateAndTime = dateFormatter.format(cal.getTime()) + " " + timeFormatter.format(cal.getTime());
+								
+								DelayedEmail delayedEmail = emailsDao.createEmail(from, recepientList.toString(), MailaterUtil.getStringIfNotNull(subject), MailaterUtil.getStringIfNotNull(body), dateAndTime);
 								
 								sendEmail(delayedEmail.getId(), null, password);
 													
@@ -634,210 +721,13 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	}
 	
 	
-	private DateNumericAdapter dayAdapter;
-	private DateArrayAdapter monthAdapter;
-	private DateNumericAdapter yearAdapter;
+
 	private EmailsDAO emailsDao;	//data source
 	private CursorChangeListener cursorChangeListener;
 	
-	private void showDateTimeDialog(View parent) {
-		final Dialog dialog = new Dialog(context);
-		LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View layout = inflater.inflate(R.layout.time2_layout, null);
-		dialog.setContentView(layout);
-		dialog.setTitle(context.getString(R.string.setTimeDate));
-
-		//instantiate the dialog fields
-		final WheelView hours = (WheelView) layout.findViewById(R.id.hour);
-		NumericWheelAdapter hourAdapter = new NumericWheelAdapter(context, 0, 23);
-		hourAdapter.setItemResource(R.layout.wheel_text_item);
-		hourAdapter.setItemTextResource(R.id.text);
-		hours.setViewAdapter(hourAdapter);
-
-		final WheelView mins = (WheelView) layout.findViewById(R.id.mins);
-		NumericWheelAdapter minAdapter = new NumericWheelAdapter(context, 0, 59, "%02d");
-		minAdapter.setItemResource(R.layout.wheel_text_item);
-		minAdapter.setItemTextResource(R.id.text);
-		mins.setViewAdapter(minAdapter);
-		mins.setCyclic(true);
-
-		final WheelView ampm = (WheelView) layout.findViewById(R.id.ampm);
-		ArrayWheelAdapter<String> ampmAdapter = new ArrayWheelAdapter<String>(context, new String[] { context.getString(R.string.am), context.getString(R.string.pm) });
-		ampmAdapter.setItemResource(R.layout.wheel_text_item);
-		ampmAdapter.setItemTextResource(R.id.text);
-		ampm.setViewAdapter(ampmAdapter);
-
-		// set current time
-		Calendar calendar = Calendar.getInstance();
-		hours.setCurrentItem(calendar.get(Calendar.HOUR));
-		mins.setCurrentItem(calendar.get(Calendar.MINUTE));
-		ampm.setCurrentItem(calendar.get(Calendar.AM_PM));
-
-		// ----------------------------------------------------- Date Activity
-		final WheelView month = (WheelView) layout.findViewById(R.id.month);
-		final WheelView year = (WheelView) layout.findViewById(R.id.year);
-		final WheelView day = (WheelView) layout.findViewById(R.id.day);
-
-		OnWheelChangedListener listener = new OnWheelChangedListener() {
-			public void onChanged(WheelView wheel, int oldValue, int newValue) {
-				updateDays(year, month, day);
-			}
-		};
-
-		// month
-		int curMonth = calendar.get(Calendar.MONTH);
-		String months[] = new String[] { context.getString(R.string.January), context.getString(R.string.February),context.getString(R.string.March),
-				context.getString(R.string.April),context.getString(R.string.May),context.getString(R.string.June),
-				context.getString(R.string.July),context.getString(R.string.August),context.getString(R.string.September),
-				context.getString(R.string.October),context.getString(R.string.November),context.getString(R.string.December)};
-		
-		monthAdapter = new DateArrayAdapter(context, months, curMonth);
-		month.setViewAdapter(monthAdapter);
-		month.setCurrentItem(curMonth);
-		month.addChangingListener(listener);
-
-		// year
-		int curYear = calendar.get(Calendar.YEAR);
-		yearAdapter = new DateNumericAdapter(context, curYear, curYear + 2, 0);
-		year.setViewAdapter(yearAdapter);
-		year.setCurrentItem(curYear);
-		year.addChangingListener(listener);
-
-		// day
-		updateDays(year, month, day);
-		day.setCurrentItem(calendar.get(Calendar.DAY_OF_MONTH) - 1);
-
-		// ----------------------------------------------------------- get the
-		// selected time
-		Button scheduleButton = (Button) layout.findViewById(R.id.setScheduleButton);
-		OnClickListener scheduleButtonListener = new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Time time = new Time();
-				time.setToNow();
-				int yearNum = time.year + year.getCurrentItem();
-				int monthNum = month.getCurrentItem();
-				int dayNum = day.getCurrentItem() + 1; // since Time day starts
-														// at 1
-
-				int hourNum = hours.getCurrentItem();
-				int minNum = mins.getCurrentItem();
-				boolean am = (ampm.getCurrentItem() == 0);
-				if (!am) {
-					hourNum += 12;
-				}
-
-				time.set(0, minNum, hourNum, dayNum, monthNum, yearNum);
-//				Toast.makeText(ScheduleActivity.this,
-//						"year : " + time.year + " month: " + time.month + " day : " + time.monthDay + " hour : " + time.hour + " min : " + time.minute, Toast.LENGTH_LONG).show();
-
-				setTime(time);
-				dialog.dismiss();
-			}
-		};
-		scheduleButton.setOnClickListener(scheduleButtonListener);
-
-		
-		dialog.setCancelable(true);
-		dialog.show();
-	}
-	
-	private void setTime(Time time)
-	{
-		this.time = time;
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(time.toMillis(false));
-		SimpleDateFormat df = new SimpleDateFormat(context.getString(R.string.dateFormat));
-		whenView.setText(df.format(cal.getTime()));
-	}
-	
-	/**
-	 * Updates day wheel. Sets max days according to selected month and year
-	 */
-	void updateDays(WheelView year, WheelView month, WheelView day) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + year.getCurrentItem());
-		calendar.set(Calendar.MONTH, month.getCurrentItem());
-
-		int maxDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-		dayAdapter = new DateNumericAdapter(context, 1, maxDays, calendar.get(Calendar.DAY_OF_MONTH) - 1);
-		day.setViewAdapter(dayAdapter);
-		int curDay = Math.min(maxDays, day.getCurrentItem() + 1);
-		day.setCurrentItem(curDay - 1, true);
-	}
-
-	/**
-	 * Adapter for numeric wheels. Highlights the current value.
-	 */
-	private class DateNumericAdapter extends NumericWheelAdapter {
-		// Index of current item
-		int currentItem;
-		// Index of item to be highlighted
-		int currentValue;
-
-		/**
-		 * Constructor
-		 */
-		public DateNumericAdapter(Context context, int minValue, int maxValue, int current) {
-			super(context, minValue, maxValue);
-			this.currentValue = current;
-			setTextSize(16);
-		}
-
-		@Override
-		protected void configureTextView(TextView view) {
-			super.configureTextView(view);
-			if (currentItem == currentValue) {
-				view.setTextColor(0xFF0000F0);
-			}
-			view.setTypeface(Typeface.SANS_SERIF);
-		}
-
-		@Override
-		public View getItem(int index, View cachedView, ViewGroup parent) {
-			currentItem = index;
-			return super.getItem(index, cachedView, parent);
-		}
-
-	}
-
-	/**
-	 * Adapter for string based wheel. Highlights the current value.
-	 */
-	private class DateArrayAdapter extends ArrayWheelAdapter<String> {
-		// Index of current item
-		int currentItem;
-		// Index of item to be highlighted
-		int currentValue;
-
-		/**
-		 * Constructor
-		 */
-		public DateArrayAdapter(Context context, String[] items, int current) {
-			super(context, items);
-			this.currentValue = current;
-			setTextSize(16);
-		}
-
-		@Override
-		protected void configureTextView(TextView view) {
-			super.configureTextView(view);
-			if (currentItem == currentValue) {
-				view.setTextColor(0xFF0000F0);
-			}
-			view.setTypeface(Typeface.SANS_SERIF);
-		}
-
-		@Override
-		public View getItem(int index, View cachedView, ViewGroup parent) {
-			currentItem = index;
-			return super.getItem(index, cachedView, parent);
-		}
-
-	}
 
 	
+
 	private boolean validateRequiredFields(View layout) {
 		EditText subject = (EditText) layout.findViewById(R.id.subject);
 		boolean isValid = true;
@@ -849,6 +739,22 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		
 		Time now = new Time();
 		now.setToNow();
+		
+		if(time == null)
+		{
+			time = new Time();
+		}
+		
+		int yearNum = mYear;
+		int monthNum = mMonth;
+		int dayNum = mDay ; // since Time day starts at 1
+
+		int hourNum = mHour;
+		int minNum = mMinute;
+		
+
+		time.set(0, minNum, hourNum, dayNum, monthNum, yearNum);
+		
 		if (time == null || time.before(now)) {
 			errorMessages.append("\n" + context.getString(R.string.enterTimeFuture));
 			isValid = false;
@@ -895,6 +801,11 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		time = null;
 		String accountName = null;
 		String accountType = null;
+		
+		Calendar now = Calendar.getInstance();
+		mYear = now.get(Calendar.YEAR);
+        mMonth = now.get(Calendar.MONTH);
+        mDay = now.get(Calendar.DAY_OF_MONTH);
 //		if(emailContacts != null) {
 //			emailContacts.clear();
 //		}

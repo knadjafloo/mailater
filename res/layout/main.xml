@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fadeScrollbars="true" >
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <LinearLayout
+<LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/compose_background"
+            android:orientation="vertical" >
+
+	<LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            
             android:orientation="horizontal" >
 
             <TextView
@@ -24,28 +19,15 @@
                 android:gravity="center_vertical"
                 android:paddingRight="5dp"
                 android:text="@string/compose"
-                android:textStyle="bold" />
+                
+                android:textStyle="bold"
+                 />
 
             <TextView
                 android:layout_width="0.5dp"
                 android:layout_height="fill_parent"
                 android:background="#dd666666" />
 
-            <TextView
-                android:id="@+id/setSchedule"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:background="@drawable/bgselector"
-                android:text="@string/setSchedule"
-                android:padding="5dp"
-                android:gravity="center_vertical"
-                android:drawableRight="@drawable/schedule"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0.5dp"
-                android:layout_height="fill_parent"
-                android:background="#dd666666" />
 
             <TextView
                 android:layout_width="0dip"
@@ -59,7 +41,18 @@
                 android:layout_gravity="right"
                 android:drawableRight="@android:drawable/ic_menu_send"
                 android:hint="@string/send" />
-        </LinearLayout>
+            </LinearLayout>
+       
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fadeScrollbars="true" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
         <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -68,18 +61,42 @@
             android:padding="5dp" >
 
             <TextView
-                android:id="@+id/whenLabel"
+                android:id="@+id/dateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:gravity="center_vertical"
-                android:text="@string/when" />
+                android:text="@string/Date" />
 
             <TextView
-                android:id="@+id/when"
+                android:id="@+id/date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/whenLabel"
+                android:layout_toRightOf="@id/dateLabel"
+                android:background="@drawable/bgselector"
+                android:gravity="center_vertical"
+                android:drawableRight="@drawable/next"
+                android:maxLines="1"
+                android:padding="15dp" >
+            </TextView>
+            
+            <TextView
+                android:id="@+id/timeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_below="@id/dateLabel"
+                android:gravity="center_vertical"
+                android:text="@string/Time" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/timeLabel"
+                android:drawableRight="@drawable/next"
+                android:layout_below="@id/date"
+                android:background="@drawable/bgselector"
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:padding="15dp" >
@@ -89,7 +106,7 @@
                 android:id="@+id/fromLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/whenLabel"
+                android:layout_below="@id/timeLabel"
                 android:padding="15dp"
                 android:gravity="center_vertical"
                 android:text="@string/from" />
@@ -98,7 +115,7 @@
                 android:id="@+id/from"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/when"
+                android:layout_below="@id/time"
                 android:layout_toRightOf="@id/fromLabel"
                 android:maxLines="1"
                 android:padding="10dp" >
@@ -144,3 +161,4 @@
     </LinearLayout>
 
 </ScrollView>
+ </LinearLayout>

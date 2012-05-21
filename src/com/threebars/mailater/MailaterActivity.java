@@ -85,16 +85,7 @@ public class MailaterActivity extends Activity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, emailContacts);
 		recipientFieldTextView.setAdapter(adapter);
 
-		TextView scheduleButton = (TextView) findViewById(R.id.setSchedule);
-		scheduleButton.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-//				Intent getSchedule = new Intent(MailaterActivity.this, ScheduleActivity.class);
-//				startActivityForResult(getSchedule, GET_SCHEDULE);
-				showDialog(GET_DATETIME);
-			}
-		});
 
 		Button sendButton = (Button) findViewById(R.id.sendButtonId);
 		sendButton.setOnClickListener(new OnClickListener() {
