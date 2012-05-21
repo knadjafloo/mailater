@@ -108,6 +108,8 @@ public class MainViewPage extends Activity {
 	  @Override
 	  public void onReceive(Context context, Intent intent) {
 		  Log.d(TAG, "Received broadcast updating the lists...");
+		  if(emailsDao.getDatabase() != null && emailsDao.getDatabase().isOpen())
+		  {
 	    	if(!adapter.getPendingCursor().isClosed()) {
 	    		adapter.getPendingCursor().requery();
 	    	}
@@ -116,6 +118,7 @@ public class MainViewPage extends Activity {
 	    	}
 	    	adapter.resetAdapters();
 	    	adapter.notifyDataSetChanged();
+		  }
 	  }
 	};
 	
@@ -147,4 +150,20 @@ public class MainViewPage extends Activity {
 		super.onDestroy();
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		switch (requestCode) {
+		case ViewPagerAdapter.PICKFILE_RESULT_CODE:
+			if (resultCode == RESULT_OK) {
+				String filePath = data.getData().getPath();
+				String fileName = data.getData().getLastPathSegment();
+				adapter.setFilePath(filePath, fileName);
+				Log.v(TAG, fileName);
+				Log.v(TAG, filePath);
+			}
+			break;
+
+		}
+	}
 }

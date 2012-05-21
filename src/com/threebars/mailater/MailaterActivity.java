@@ -121,7 +121,7 @@ public class MailaterActivity extends Activity {
 						}
 
 						Log.d(TAG, recepientList.toString());
-						DelayedEmail delayedEmail = datasource.createEmail(from, recepientList.toString(), MailaterUtil.getStringIfNotNull(subject), MailaterUtil.getStringIfNotNull(body),time.format("%Y/%m/%d T%H:%M"));
+						DelayedEmail delayedEmail = datasource.createEmail(from, recepientList.toString(), MailaterUtil.getStringIfNotNull(subject), MailaterUtil.getStringIfNotNull(body),time.format("%Y/%m/%d T%H:%M"), null);
 						
 
 						// send intent to start service to send mail later given

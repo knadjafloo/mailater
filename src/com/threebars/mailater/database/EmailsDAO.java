@@ -40,7 +40,11 @@ public class EmailsDAO {
 		dbHelper.close();
 	}
 	
-	public DelayedEmail createEmail(String from, String recepients, String subject, String body, String date) {
+	public SQLiteDatabase getDatabase() {
+		return this.database;
+	}
+	
+	public DelayedEmail createEmail(String from, String recepients, String subject, String body, String date, String attachment) {
 		ContentValues values = new ContentValues();
 		values.put(COLUMN_FROM.getName(), from);
 		values.put(COLUMN_BODY.getName(), body);
@@ -48,6 +52,7 @@ public class EmailsDAO {
 		values.put(COLUMN_RECEPIENTS.getName(), recepients);
 		values.put(COLUMN_STATUS.getName(), PENDING);
 		values.put(COLUMN_DATE.getName(), date);
+		values.put(COLUMN_ATTACHMENT.getName(), attachment);
 		long insertId = database.insert(MySQLiteHelper.TABLE_EMAILS, null, values);
 		// To show how to query
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_EMAILS, getAllColumns(), COLUMN_ID + " = " + insertId, null, null, null, null);
@@ -118,6 +123,7 @@ public class EmailsDAO {
 		delayedEmail.setReceipients(cursor.getString(COLUMN_RECEPIENTS.getIndex()));
 		delayedEmail.setSubject(cursor.getString(COLUMN_SUBJECT.getIndex()));
 		delayedEmail.setStatus(cursor.getString(COLUMN_STATUS.getIndex()));
+		delayedEmail.setAttachments(cursor.getString(COLUMN_ATTACHMENT.getIndex()));
 		String timeString = cursor.getString(COLUMN_DATE.getIndex());
 		DateFormat df = new SimpleDateFormat("MMM dd, yyyy h:mmaa");
 		try {

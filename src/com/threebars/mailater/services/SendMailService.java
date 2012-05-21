@@ -1,5 +1,8 @@
 package com.threebars.mailater.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.mail.AuthenticationFailedException;
 
 import com.threebars.mailater.Mail;
@@ -12,6 +15,8 @@ import com.threebars.mailater.database.MySQLiteHelper;
 import com.threebars.mailater.model.DelayedEmail;
 import com.threebars.mailater.util.MailaterUtil;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -68,11 +73,11 @@ public class SendMailService extends Service {
 				datasource.open();
 
 				DelayedEmail delayedEmail = datasource.getEmail(rowId);
-				Log.d(TAG, "sender: " + delayedEmail.getSender());
-				Log.d(TAG, "receip : " + delayedEmail.getReceipients());
-				Log.d(TAG, "subject: " + delayedEmail.getSubject());
-				Log.d(TAG, "body   : " + delayedEmail.getBody());
-				Log.d(TAG, "accName: " + accountName);
+//				Log.d(TAG, "sender: " + delayedEmail.getSender());
+//				Log.d(TAG, "receip : " + delayedEmail.getReceipients());
+//				Log.d(TAG, "subject: " + delayedEmail.getSubject());
+//				Log.d(TAG, "body   : " + delayedEmail.getBody());
+//				Log.d(TAG, "accName: " + accountName);
 				boolean authenticationFailed = false;
 				boolean otherErrorOccured = false;
 				try {
@@ -104,7 +109,12 @@ public class SendMailService extends Service {
 					m.setBody(delayedEmail.getBody());
 
 					try {
-						// m.addAttachment("/sdcard/filelocation");
+						String attachments = delayedEmail.getAttachments();
+						if(attachments!= null && attachments.length() > 0) {
+							Log.v(TAG, attachments);
+							m.addAttachment(attachments);	
+						}
+						
 						if (m.send()) {
 							Log.e(TAG, "finished sending email...");
 							handler.post(updateGuiNotification);
@@ -133,8 +143,9 @@ public class SendMailService extends Service {
 					e.printStackTrace();
 				}
 				finally {
-					datasource.close();
+					Log.d(TAG, "send email now closing db");
 					
+					datasource.close();
 					String errorMsg = "";
 					//send error notification
 					if(authenticationFailed)
@@ -175,7 +186,7 @@ public class SendMailService extends Service {
 		myNotification.flags |= Notification.FLAG_AUTO_CANCEL;
 		myNotification.setLatestEventInfo(context, notificationTitle, notificationText, pendingIntent);
 		notificationManager.notify(MY_NOTIFICATION_ID, myNotification);
-
+		Log.d(TAG, "sent notification");
 		stopSelf();
 	}
 	

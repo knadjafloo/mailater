@@ -18,7 +18,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		COLUMN_FROM("_from", 3),
 		COLUMN_BODY("_body", 4),
 		COLUMN_STATUS("status", 5),
-		COLUMN_DATE("date", 6);
+		COLUMN_DATE("date", 6),
+		COLUMN_ATTACHMENT("attachment", 7);
 		
 		private String columnName;
 		private int columnIndex;
@@ -44,7 +45,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	private static final String TAG = "MySQLiteHelper";
 	
 	private static final String DATABASE_NAME = "mailater.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 
 	private final Context context;
 	
@@ -55,6 +56,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 			+ " text not null,"  + COLUMN_NAMES.COLUMN_BODY
 			+ " text not null,"  + COLUMN_NAMES.COLUMN_STATUS
 			+ " text not null,"  + COLUMN_NAMES.COLUMN_DATE
+			+ " text not null,"  + COLUMN_NAMES.COLUMN_ATTACHMENT
 			+ " text not null);";
 
 	public MySQLiteHelper(Context context) {
@@ -70,7 +72,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.w(MySQLiteHelper.class.getName(), "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
-		db.execSQL("DROP TABLE IF EXISTS" + TABLE_EMAILS);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_EMAILS);
 		onCreate(db);
 	}
 

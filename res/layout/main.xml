@@ -101,12 +101,35 @@
                 android:maxLines="1"
                 android:padding="15dp" >
             </TextView>
+            
+            <ImageView
+                android:id="@+id/attachLabel"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitXY"
+                android:layout_below="@id/timeLabel"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/paperclip"
+                android:contentDescription="Attachment"/>
+
+            <TextView
+                android:id="@+id/attachment"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/attachLabel"
+                android:drawableRight="@drawable/next"
+                android:layout_below="@id/time"
+                android:background="@drawable/bgselector"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:padding="15dp" >
+            </TextView>
 
             <TextView
                 android:id="@+id/fromLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/timeLabel"
+                android:layout_below="@id/attachLabel"
                 android:padding="15dp"
                 android:gravity="center_vertical"
                 android:text="@string/from" />
@@ -115,7 +138,7 @@
                 android:id="@+id/from"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/time"
+                android:layout_below="@id/attachment"
                 android:layout_toRightOf="@id/fromLabel"
                 android:maxLines="1"
                 android:padding="10dp" >

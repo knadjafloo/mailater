@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -75,6 +76,8 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	private static final int DATE_DIALOG_ID = 10;
 	private static final int TIME_DIALOG_ID = 11;
 	
+	public static final int PICKFILE_RESULT_CODE = 20;
+	
 	private int mYear;
     private int mMonth;
     private int mDay;
@@ -105,6 +108,9 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	private AutoCompleteTextView recipientFieldTextView ;
 	private TextView dateView;
 	private TextView timeView;
+	private TextView attachmentView;
+	
+	private String attachmentPath;
 	
 	private SimpleDateFormat dateFormatter;
 	private SimpleDateFormat timeFormatter;
@@ -238,7 +244,6 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	
 	private SimpleCursorAdapter initiateOutboxLayout(final View layout, String action) {
 		Log.d(TAG, "initiateOutboxLayout");
-		
 		//TODO do this using fragments
 		if(action.equals(EmailsDAO.PENDING)) {
 			pendingCursor = emailsDao.getCursorForAllEmailsWithStatus(action);
@@ -499,6 +504,19 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
             }
         });
 		
+		TextView timeLabel = (TextView)layout.findViewById(R.id.timeLabel);
+		
+		
+		attachmentView = (TextView) layout.findViewById(R.id.attachment);
+		attachmentView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("file/*");
+                ((Activity) context).startActivityForResult(intent,PICKFILE_RESULT_CODE);
+            }
+        });
+		
+		
 		// TODO - do in separate thread
 		AccountManager accountManager = AccountManager.get(context);
 		final Account[] allAccounts = accountManager.getAccounts();
@@ -598,7 +616,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 								
 								String dateAndTime = dateFormatter.format(cal.getTime()) + " " + timeFormatter.format(cal.getTime());
 								
-								DelayedEmail delayedEmail = emailsDao.createEmail(from, recepientList.toString(), MailaterUtil.getStringIfNotNull(subject), MailaterUtil.getStringIfNotNull(body), dateAndTime);
+								DelayedEmail delayedEmail = emailsDao.createEmail(from, recepientList.toString(), MailaterUtil.getStringIfNotNull(subject), MailaterUtil.getStringIfNotNull(body), dateAndTime, attachmentPath);
 								
 								sendEmail(delayedEmail.getId(), null, password);
 													
@@ -801,7 +819,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		time = null;
 		String accountName = null;
 		String accountType = null;
-		
+		attachmentPath = null;
 		Calendar now = Calendar.getInstance();
 		mYear = now.get(Calendar.YEAR);
         mMonth = now.get(Calendar.MONTH);
@@ -853,6 +871,11 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		
 		ListView listView = (ListView) layout.findViewById(android.R.id.list);
 		listView.setAdapter(pendingAdapter);
+	}
+
+	public void setFilePath(String filePath, String fileName) {
+		attachmentView.setText(fileName);
+		attachmentPath = filePath ;
 	}
 
 }
