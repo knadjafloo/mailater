@@ -110,7 +110,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	private TextView timeView;
 	private TextView attachmentView;
 	
-	private String attachmentPath;
+	private String attachmentPath = "";
 	
 	private SimpleDateFormat dateFormatter;
 	private SimpleDateFormat timeFormatter;
@@ -819,7 +819,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		time = null;
 		String accountName = null;
 		String accountType = null;
-		attachmentPath = null;
+		attachmentPath = "";
 		Calendar now = Calendar.getInstance();
 		mYear = now.get(Calendar.YEAR);
         mMonth = now.get(Calendar.MONTH);
