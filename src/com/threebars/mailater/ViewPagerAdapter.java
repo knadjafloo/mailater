@@ -32,6 +32,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,6 +52,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 
 import com.threebars.mailater.database.EmailsDAO;
 import com.threebars.mailater.database.MySQLiteHelper.COLUMN_NAMES;
@@ -209,10 +211,16 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	}
 	
 	public Cursor getPendingCursor() {
+		if(pendingCursor.isClosed()) {
+			pendingCursor = emailsDao.getCursorForAllEmailsWithStatus(EmailsDAO.PENDING);
+		}
 		return this.pendingCursor;
 	}
 	
 	public Cursor getOutboxCursor() {
+		if(outboxCursor.isClosed()) {
+			outboxCursor = emailsDao.getCursorForAllEmailsWithStatus(EmailsDAO.SENT);
+		}
 		return this.outboxCursor;
 	}
 	
@@ -510,9 +518,27 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		attachmentView = (TextView) layout.findViewById(R.id.attachment);
 		attachmentView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("file/*");
-                ((Activity) context).startActivityForResult(intent,PICKFILE_RESULT_CODE);
+//            	Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                intent.setType("file/*");
+
+            	final String MIME_TYPE_ALL = "*/*"; // Filter for all MIME types
+            	String title = "";//context.getString(R.string.select_file);		
+        		String type = MIME_TYPE_ALL;	
+        		
+        		// Implicitly allow the user to select a particular kind of data
+        		final Intent intent = new Intent(Intent.ACTION_GET_CONTENT); 
+        		// Specify the MIME data type filter (Must be lower case)
+        		intent.setType(type.toLowerCase()); 
+        		// Only return URIs that can be opened with ContentResolver
+        		intent.addCategory(Intent.CATEGORY_OPENABLE);
+        		// Display intent chooser
+        		try {
+        			 ((Activity) context).startActivityForResult(intent,PICKFILE_RESULT_CODE);
+        		} catch (android.content.ActivityNotFoundException e) {
+//        			onFileError(e);
+        		}
+            	
+//                ((Activity) context).startActivityForResult(intent,PICKFILE_RESULT_CODE);
             }
         });
 		

@@ -35,8 +35,7 @@ public class MainViewPage extends Activity {
 		Log.d(TAG, "calling onCreate");
 		setContentView(R.layout.scroll_main);
 		
-		emailsDao = new EmailsDAO(this);
-		emailsDao.open();
+	
 		
 		ViewPager pager = (ViewPager) findViewById(R.id.viewpager);
 		adapter = new ViewPagerAdapter(this, pager);
@@ -58,6 +57,8 @@ public class MainViewPage extends Activity {
 		
 		adapter.setCursorChangeListener(cursorChangeListener);
 		
+		emailsDao = new EmailsDAO(this);
+		emailsDao.open();
 		Cursor pendingCursor = emailsDao.getCursorForAllEmailsWithStatus(EmailsDAO.PENDING);
 		Cursor outboxCursor = emailsDao.getCursorForAllEmailsWithStatus(EmailsDAO.SENT);
 //		startManagingCursor(pendingCursor);
@@ -66,7 +67,6 @@ public class MainViewPage extends Activity {
 		adapter.setDataSource(emailsDao);
 		adapter.setPendingCursor(pendingCursor);
 		adapter.setOutboxCursor(outboxCursor);
-		
 		
 		
 		
@@ -134,10 +134,22 @@ public class MainViewPage extends Activity {
 	@Override
 	protected void onResume() {
 		Log.d(TAG, "onResume" + (emailsDao != null));
-		if(emailsDao != null) {	//first time
-			Log.d(TAG, "trying to open emailsDao");
-			emailsDao.open();	
-		}
+		
+		emailsDao = new EmailsDAO(this);
+		emailsDao.open();
+		Cursor pendingCursor = emailsDao.getCursorForAllEmailsWithStatus(EmailsDAO.PENDING);
+		Cursor outboxCursor = emailsDao.getCursorForAllEmailsWithStatus(EmailsDAO.SENT);
+//		startManagingCursor(pendingCursor);
+//		startManagingCursor(outboxCursor);
+		
+		adapter.setDataSource(emailsDao);
+		adapter.setPendingCursor(pendingCursor);
+		adapter.setOutboxCursor(outboxCursor);
+		
+//		if(emailsDao != null ) {	//first time
+//			Log.d(TAG, "trying to open emailsDao");
+//			emailsDao.open();	
+//		}
 		//set the adapters
 		adapter.resetAdapters();
 		super.onResume();
